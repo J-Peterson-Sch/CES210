@@ -10,7 +10,6 @@ public class JournalProject
         string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
         string projectDirectory = Directory.GetParent(baseDirectory).Parent.Parent.Parent.FullName;
         Directory.SetCurrentDirectory(projectDirectory);
-        
         Journal workingJournal = new Journal();
         PromptGenerator promptGenerator = new PromptGenerator("prompts.txt");
 
@@ -55,47 +54,15 @@ public class JournalProject
             }
             //Display journal
             else if(userInput == "2"){
-                Console.Clear();
                 workingJournal.displayAll();
             }
             //Load
             else if(userInput == "3"){
-                string[] loadedEntries;
-                Console.Clear();
-                Console.Write("Enter the file name you want to load from: ");
-                string loadFilePath = Console.ReadLine();
-
-                if (File.Exists(loadFilePath))
-                {
-                    loadedEntries = File.ReadAllLines(loadFilePath);
-
-                    foreach (string entry in loadedEntries){
-                        string[] splitEntry = entry.Split("|");
-                        workingJournal.addEntry(timestamp: splitEntry[0], promt: splitEntry[1], userEnteredText: splitEntry[2]);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("File not found.");
-                    loadedEntries = new string[0];
-                }
-
-                if (loadedEntries.Length == 0)
-                {
-                    Console.WriteLine("No entries were loaded.");
-                }
+                workingJournal.loadFromFile();
             }
             //Save Entries
             else if(userInput == "4"){
-                Console.Clear();
-                Console.Write("Enter the file name you want to save to: ");
-                string fileName = Console.ReadLine();
-                using (StreamWriter outputFile = new StreamWriter(fileName)){
-                    foreach (Entry entry in workingJournal._entries)
-                    {
-                        outputFile.WriteLine(entry.display());
-                    }
-                }
+                workingJournal.saveToFile();
             }
         } while(userInput != "5");
     }
