@@ -49,18 +49,11 @@ public class Journal {
         if (File.Exists(loadFilePath))
         {
             loadedEntries = File.ReadAllText(loadFilePath);
-
             _entries = JsonSerializer.Deserialize<List<Entry>>(loadedEntries);
-
-            // foreach (string entry in loadedEntries){
-            //     string[] splitEntry = entry.Split("|");
-            //     addEntry(timestamp: splitEntry[0], promt: splitEntry[1], userEnteredText: splitEntry[2]);
-            // }
         }
         else
         {
             Console.WriteLine("File not found. No entries were loaded.");
         }
-
     }
 }
