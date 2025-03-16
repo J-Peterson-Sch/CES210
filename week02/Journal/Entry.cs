@@ -1,20 +1,23 @@
+using System.Text.Json.Serialization;
+
 public class Entry {
 
-    public string _date = "";
-    public string _promptText = "";
-    public string _entryText = "";
+    public string _date { get; set; }
+    public string _promptText { get; set; }
+    public string _entryText { get; set; }
 
-    public Entry(string promptText, string entryText, string timestamp)
+    [JsonConstructor]
+    public Entry(string _promptText, string _entryText, string _date)
     {
-        _promptText = promptText;
-        _entryText = entryText;
+        this._promptText = _promptText;
+        this._entryText = _entryText;
 
-        if(String.IsNullOrEmpty(timestamp)){
+        if(String.IsNullOrEmpty(_date)){
             DateTime generatedTimestamp = DateTime.Now;
-            _date = generatedTimestamp.ToString("MM-dd-yyyy HH:mm:ss");
+            this._date = generatedTimestamp.ToString("MM-dd-yyyy HH:mm:ss");
         }
         else{
-            _date = timestamp;
+            this._date = _date;
         }
     }
 

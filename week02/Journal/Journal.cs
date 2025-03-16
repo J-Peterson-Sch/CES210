@@ -35,40 +35,32 @@ public class Journal {
         Console.Clear();
         Console.Write("Enter the file name you want to save to: ");
         string fileName = Console.ReadLine();
-        using (StreamWriter outputFile = new StreamWriter(fileName))
-        {
-            foreach (Entry entry in this._entries)
-            {
-                outputFile.WriteLine(entry.display());
-            }
-        }
+        string jsonString = JsonSerializer.Serialize(_entries, new JsonSerializerOptions{WriteIndented = true});
+        File.WriteAllText(fileName, jsonString);
     }
 
     public void loadFromFile()
     {
-        string[] loadedEntries;
+        string loadedEntries;
         Console.Clear();
         Console.Write("Enter the file name you want to load from: ");
         string loadFilePath = Console.ReadLine();
 
         if (File.Exists(loadFilePath))
         {
-            loadedEntries = File.ReadAllLines(loadFilePath);
+            loadedEntries = File.ReadAllText(loadFilePath);
 
-            foreach (string entry in loadedEntries){
-                string[] splitEntry = entry.Split("|");
-                addEntry(timestamp: splitEntry[0], promt: splitEntry[1], userEnteredText: splitEntry[2]);
-            }
+            _entries = JsonSerializer.Deserialize<List<Entry>>(loadedEntries);
+
+            // foreach (string entry in loadedEntries){
+            //     string[] splitEntry = entry.Split("|");
+            //     addEntry(timestamp: splitEntry[0], promt: splitEntry[1], userEnteredText: splitEntry[2]);
+            // }
         }
         else
         {
-            Console.WriteLine("File not found.");
-            loadedEntries = new string[0];
+            Console.WriteLine("File not found. No entries were loaded.");
         }
 
-        if (loadedEntries.Length == 0)
-        {
-            Console.WriteLine("No entries were loaded.");
-        }
-    }   
+    }
 }

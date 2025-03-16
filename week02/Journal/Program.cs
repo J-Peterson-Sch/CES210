@@ -1,3 +1,6 @@
+// Jordan Peterson
+// For my creativity erqirement I have the program write to the save file in json.
+
 using System;
 public class JournalProject
 {
