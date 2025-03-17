@@ -30,4 +30,24 @@ public class Fraction
     {
         return (double)_numerator / _denominator;
     }
+
+    public int GetNumerator()
+    {
+        return _numerator;
+    }
+
+    public int GetDenominator()
+    {
+        return _denominator;
+    }
+
+    public void SetNumerator(int numerator)
+    {
+        _numerator = numerator;
+    }
+
+    public void SetDenominator(int denominator)
+    {
+        _denominator = denominator;
+    }
 }
