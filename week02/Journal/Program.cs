@@ -1,12 +1,15 @@
 // Jordan Peterson
 // For my creativity erqirement I have the program write to the save file in json.
+// I'm also pulling the prompts from a txt file.
 
 using System;
 public class JournalProject
 {
     static void Main()
     {
+    #nullable enable
         string? userInput;
+    #nullable disable
         bool validInput;
 
         //Sets the working dir to the same as the project.cs file
