@@ -8,7 +8,7 @@ public class Word {
         this._text = text;
     }
 
-    public void hid()
+    public void hide()
     {
         _isHidden = true;
     }

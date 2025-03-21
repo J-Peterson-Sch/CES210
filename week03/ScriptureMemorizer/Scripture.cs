@@ -44,7 +44,7 @@ public class Scripture {
                 randomNumber = random.Next(0, _words.Count);
                 if (!_words[randomNumber].isHidden())
                 {
-                    _words[randomNumber].hid();
+                    _words[randomNumber].hide();
                     break;
                 }                
             } while (true);
