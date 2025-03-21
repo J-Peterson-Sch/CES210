@@ -6,6 +6,7 @@ public class Scripture {
     public Scripture(Reference reference, string text)
     {
         this._reference = reference;
+        this._words = new List<Word>();
         
         string[] wordsFromText = text.Split(' ');
 
@@ -17,6 +18,11 @@ public class Scripture {
 
     public string display()
     {
-        return $"";
+        string text = "";
+        foreach (var word in _words)
+        {
+            text += word.getDisplayText() + " ";
+        }
+        return $"{_reference.getDisplayText()} {text}";
     }
 }
