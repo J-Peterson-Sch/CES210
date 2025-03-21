@@ -8,7 +8,8 @@ public class Scripture {
         this._reference = reference;
         this._words = new List<Word>();
         
-        string[] wordsFromText = text.Split(' ');
+        string cleanedText = text.Replace('\n', ' ');
+        string[] wordsFromText = cleanedText.Split(' ');
 
         foreach (var word in wordsFromText)
         {
@@ -48,6 +49,14 @@ public class Scripture {
                     break;
                 }                
             } while (true);
+        }
+    }
+
+    public void resetWordVisibility()
+    {
+        foreach (Word word in _words)
+        {
+            word.show();
         }
     }
 

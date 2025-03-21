@@ -1,3 +1,6 @@
+// Jordan Peterson
+// Added a restart functionality to help the user start over without haveing to restart the program.
+
 using System;
 
 class Program
@@ -25,6 +28,10 @@ class Program
             {
                 scripture.blankOutWords(5);
             }
+            else if (input == "restart")
+            {
+                scripture.resetWordVisibility();
+            }
             
         } while (input != "quit");
     }
@@ -34,6 +41,6 @@ class Program
         Console.Clear();
         Console.WriteLine(scripture.display());
         Console.WriteLine();
-        Console.WriteLine("Press enter to continue or type 'quit' to finish: ");
+        Console.WriteLine("Press enter to continue, type 'quit' to finish or 'restart' to start over: ");
     }
 }
