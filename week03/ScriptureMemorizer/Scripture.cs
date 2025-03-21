@@ -25,4 +25,42 @@ public class Scripture {
         }
         return $"{_reference.getDisplayText()} {text}";
     }
+
+    public void blankOutWords(int numberToBlankOut)
+    {
+        int hiddenWordCount = numberOfHiddenWords();
+        if (numberToBlankOut > _words.Count - hiddenWordCount)
+        {
+            numberToBlankOut = _words.Count - hiddenWordCount;
+        }
+        
+        Random random = new Random();
+        int randomNumber = 0;
+
+        for (int i = 0; i < numberToBlankOut; i++)
+        {
+            do
+            {
+                randomNumber = random.Next(0, _words.Count);
+                if (!_words[randomNumber].isHidden())
+                {
+                    _words[randomNumber].hid();
+                    break;
+                }                
+            } while (true);
+        }
+    }
+
+    private int numberOfHiddenWords()
+    {
+        int numberOfHiddenWords = 0;
+        foreach (Word word in _words)
+        {
+            if (word.isHidden())
+            {
+                numberOfHiddenWords += 1;
+            }
+        }
+        return numberOfHiddenWords;
+    }
 }

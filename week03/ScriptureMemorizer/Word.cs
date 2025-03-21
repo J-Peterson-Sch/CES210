@@ -25,6 +25,14 @@ public class Word {
 
     public string getDisplayText()
     {
-        return _text;
+        if (_isHidden)
+        {
+            string blankWord = new string('_', _text.Length);
+            return blankWord;
+        }
+        else
+        {
+            return _text;    
+        }
     }
 }

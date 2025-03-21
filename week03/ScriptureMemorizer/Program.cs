@@ -15,7 +15,18 @@ class Program
     static void Main(string[] args)
     {
         Scripture scripture = new Scripture(_reference, _text);
-        printToScreen(scripture);
+        string input = "";
+        do
+        {
+            printToScreen(scripture);
+            input = Console.ReadLine();
+
+            if (input == "")
+            {
+                scripture.blankOutWords(5);
+            }
+            
+        } while (input != "quit");
     }
 
     static void printToScreen(Scripture scripture)
