@@ -10,15 +10,15 @@ class Program
         johnsOrder.addProduct(new Product("Banana",6666,10,45));
         johnsOrder.addProduct(new Product("Protin Bar",9909,3.50,10));
         johnsOrder.addProduct(new Product("Gold Krugerrand",989988,15000,8));
-
+        
+        Console.Clear();
         Console.WriteLine($"{johnsOrder.printPackingLabel()}");
-        Console.WriteLine("-----------------------------");
         Console.WriteLine($"{johnsOrder.orderTotal():C2}");
-        Console.WriteLine("-----------------------------");
+        Console.WriteLine("");
         Console.WriteLine($"{johnsOrder.printShippingLabel()}");
-        Console.WriteLine("-----------------------------");
         
         Console.WriteLine("");
+        Console.WriteLine("-----------------------------");
         Console.WriteLine("");
 
         Order jennysOrder = new Order(new Customer("Jenny Popstine", new Address("234 D street", "Westhaven", "Eastland", "Austira")));
@@ -27,13 +27,12 @@ class Program
         jennysOrder.addProduct(new Product("Cow Food",933489988,500,2));
 
         Console.WriteLine($"{jennysOrder.printPackingLabel()}");
-        Console.WriteLine("-----------------------------");
         Console.WriteLine($"{jennysOrder.orderTotal():C2}");
-        Console.WriteLine("-----------------------------");
+        Console.WriteLine("");
         Console.WriteLine($"{jennysOrder.printShippingLabel()}");
-        Console.WriteLine("-----------------------------");
         
         Console.WriteLine("");
+        Console.WriteLine("-----------------------------");
         Console.WriteLine("");
     }
 }
