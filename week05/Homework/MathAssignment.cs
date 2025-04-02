@@ -9,7 +9,7 @@ public class MathAssignment : Assignment {
         this._problems = problems;
     }
 
-    public string GetHomework()
+    public string GetHomeworkList()
     {
         return $"Section {_testbookSection} Problems {_problems}";
     }
