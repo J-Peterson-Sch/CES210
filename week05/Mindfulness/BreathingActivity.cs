@@ -2,7 +2,7 @@ public class BreathingActivity : Activity {
 
     private int breathCount = 10; //breath count in seconds
 
-    public BreathingActivity(string name, string description, int duration) : base(name, description, duration)
+    public BreathingActivity(string name, string description) : base(name, description)
     {
         // this._example = example;
         // this._anotherExample = anotherExample;
@@ -10,6 +10,6 @@ public class BreathingActivity : Activity {
 
     public void Run()
     {
-        Console.WriteLine("I'm running");
+        base.DisplayStartingMessage();
     }
 }

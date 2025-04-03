@@ -1,9 +1,9 @@
-public class ListingActivity {
+public class ListingActivity : Activity{
 
     private int _count;
     private List<string> _prompts;
 
-    public ListingActivity(string name, string description, int duration) : base(name, description, duration)
+    public ListingActivity(string name, string description) : base(name, description)
     {
         // this._example = example;
         // this._anotherExample = anotherExample;
@@ -19,9 +19,9 @@ public class ListingActivity {
         Console.WriteLine("Geting a promp");
     }
 
-    public List<string> GetListFromUser()
-    {
-        Console.WriteLine("Give me your list");
-        return;
-    }
+    // public List<string> GetListFromUser()
+    // {
+    //     Console.WriteLine("Give me your list");
+    //     return;
+    // }
 }
