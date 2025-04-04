@@ -11,18 +11,25 @@ public class Activity {
         // this._duration = duration;
     }
 
+    public int GetDuration()
+    {
+        return _duration;
+    }
+
     public void DisplayStartingMessage()
     {
         Console.Clear();
-        Console.WriteLine($"You are about to start the {_name}");
+        Console.WriteLine($"Welcome to the {_name} activity");
+        Console.WriteLine("");
         Console.WriteLine(_description);
+        Console.WriteLine("");
 
         int userInput;
         bool isValid = false;
 
         while (!isValid)
         {
-            Console.WriteLine("How many seconds would you like your session to last?: ");
+            Console.WriteLine("How long, in seconds, would you like your session to last?: ");
             string input = Console.ReadLine();
 
             if (int.TryParse(input, out userInput))
@@ -37,13 +44,20 @@ public class Activity {
         }
 
         Console.Clear();
-        Console.WriteLine("You have 5 seconds to prepare your self...");
+        Console.WriteLine("Get ready...");
+        ShowCountDown(5);
 
     }
 
     public void DisplayEndingMessage()
     {
-        Console.WriteLine("This is the ending message");
+        Console.Clear();
+        Console.WriteLine("Good job!");
+        ShowSpinner(5);
+
+        Console.Clear();
+        Console.WriteLine($"You spent {_duration} seconds preforming the {_name} activity.");
+        ShowSpinner(5);
     }
 
     public void ShowSpinner(int seconds)
@@ -71,18 +85,57 @@ public class Activity {
         }
     }
 
+    public void ShowMovingDots(int seconds)
+    {
+        int characterSetLength = 0;
+        Console.Write("\r{0, "+characterSetLength+"}", " ");
+        for (int i = 0; i < seconds; i++)
+        {
+            Console.Write("       .   .   .   .   .");
+            Thread.Sleep(200);
+
+            Console.Write("\r{0, "+characterSetLength+"}", " ");
+            Console.Write("   .       .   .   .   .");
+
+            Thread.Sleep(200);
+
+            Console.Write("\r{0, "+characterSetLength+"}", " ");
+            Console.Write("   .   .       .   .   .");
+
+            Thread.Sleep(200);
+
+            Console.Write("\r{0, "+characterSetLength+"}", " ");
+            Console.Write("   .   .   .       .   .");
+
+            Thread.Sleep(200);
+
+            Console.Write("\r{0, "+characterSetLength+"}", " ");
+            Console.Write("   .   .   .   .       .");
+
+            Thread.Sleep(200);
+
+            Console.Write("\r{0, "+characterSetLength+"}", " ");
+            Console.Write("   .   .   .   .   .    ");
+
+            Thread.Sleep(200);
+
+            Console.Write("\r{0, "+characterSetLength+"}", " ");
+        }
+    }
+
     public void ShowCountDown(int seconds)
     {
-        Console.Clear();
         for (int i = seconds; i > 0; i--)
         {
-            Console.Write($"\r{i}"); // \r sends the cursor to the beginning of the line
-            Thread.Sleep(200);          // Pause for one second
+            Console.Write($"\r{i}");
+            Thread.Sleep(1000);
 
-        // Clear any extra characters from previous outputs
+            // Clear any extra characters from previous outputs. \r moves the curser to the start of the line.
+            // {0, " + seconds.ToString().Length + "} has it replace what's in the curley brakets with the zero index,
+            // " + seconds.ToString().Length + " tells it how much space to take up. You have to concat the length
+            // or it will read it as a literal string for some reason.
             Console.Write("\r{0, " + seconds.ToString().Length + "}", " ");
         }
-        
-        Console.WriteLine(); // New line after the countdown finishes
+        Console.WriteLine();
     }
 }
