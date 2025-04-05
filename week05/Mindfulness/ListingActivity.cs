@@ -41,7 +41,7 @@ public class ListingActivity : Activity{
 
     }
 
-    public void GetRandomPrompt()
+    private void GetRandomPrompt()
     {
         Random randomNumber = new Random();
         int randomIndex = randomNumber.Next(_prompts.Count); // Generate a random index

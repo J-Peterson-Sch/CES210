@@ -51,7 +51,7 @@ public class ReflectingActivity : Activity{
         base.SetTrueDuration(startTime,trueEndTime);
     }
 
-    public string GetRandomPrompt()
+    private string GetRandomPrompt()
     {
         Random randomNumber = new Random();
         int randomIndex = randomNumber.Next(_prompts.Count); // Generate a random index
@@ -59,19 +59,19 @@ public class ReflectingActivity : Activity{
         
     }
 
-    public string GetRandomQuestion()
+    private string GetRandomQuestion()
     {
         Random randomNumber = new Random();
         int randomIndex = randomNumber.Next(_questions.Count);
         return _questions[randomIndex];
     }
 
-    public void DisplayPrompt()
+    private void DisplayPrompt()
     {
         Console.WriteLine($"--- {GetRandomPrompt()}. ---");
         Console.WriteLine("");
     }
-    public void DisplayQuestion()
+    private void DisplayQuestion()
     {   
         Console.Write($"> {GetRandomQuestion()} -");
         ShowSpinner(_reflectingTime);
