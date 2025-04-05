@@ -1,23 +1,41 @@
 public class ListingActivity : Activity{
 
     private static string _name = "Listing Activity";
-    private static string _description = "This activity will help you reflect on times in your"
-            + "life when you have shown strenght and resilience. This will help you recognize "
-            + "the power you have and how you can use it in outher aspects of your life.";
-    private int _count;
-    private List<string> _prompts = ["Think of a time when you did something really difficult",
-    "Think of a time when you acomplished something really great", "Think of a time when you helped someone do something great"];
+    private static string _description = "This activity will help you reflect on the good things in your "
+                                        + "life by having you list as many things as you can i a cetain area.";
+
+            
+    private int _count = 0;
+    private List<string> _prompts = ["Who are people that you appreciate?", "What are personal strengths of yours?", 
+                "Who are people that you have helped this week?", "When have you felt the Holy Ghost this month?", 
+                "Who are some of your personal heroes?"
+];
 
     public ListingActivity() : base(_name, _description)
     {
-        // this._example = example;
-        // this._anotherExample = anotherExample;
     }
 
     public void Run()
     {
+        Console.Clear();
+        Console.WriteLine("List as many responses you can to the following prompt:");
+        GetRandomPrompt();
+        Console.WriteLine("");
+        Console.WriteLine("You may begin in: ");
+        ShowCountDown(5);
         
-        
+        base.GetDuration();
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(base.GetDuration());
+
+        while (DateTime.Now < endTime)
+        {
+            Console.Write(">");
+            Console.ReadLine();
+            _count ++;
+        }
+
+        Console.WriteLine($"You listed {_count} items!");
 
     }
 
@@ -26,10 +44,9 @@ public class ListingActivity : Activity{
         Random randomNumber = new Random();
         int randomIndex = randomNumber.Next(_prompts.Count); // Generate a random index
         
-        Console.WriteLine($"--- {_prompts[randomIndex]}. ---");
-        Console.WriteLine("");
+        Console.WriteLine($"--- {_prompts[randomIndex]} ---");
     }
-    
+
     // public List<string> GetListFromUser()
     // {
     //     Console.WriteLine("Give me your list");

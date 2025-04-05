@@ -19,7 +19,7 @@ public class Activity {
     public void DisplayStartingMessage()
     {
         Console.Clear();
-        Console.WriteLine($"Welcome to the {_name} activity");
+        Console.WriteLine($"Welcome to the {_name}");
         Console.WriteLine("");
         Console.WriteLine(_description);
         Console.WriteLine("");
@@ -51,7 +51,8 @@ public class Activity {
 
     public void DisplayEndingMessage()
     {
-        Console.Clear();
+        // Console.Clear();
+        Console.WriteLine("");
         Console.WriteLine("Good job!");
         ShowSpinner(5);
 

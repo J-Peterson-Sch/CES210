@@ -57,9 +57,11 @@ class Program
                 reflecting.Run();
                 reflecting.DisplayEndingMessage();
             }
-            //Load
             else if(userInput == "3"){
-
+                ListingActivity listing = new ListingActivity();
+                listing.DisplayStartingMessage();
+                listing.Run();
+                listing.DisplayEndingMessage();
             }
             //Save Entries
             else if(userInput == "4"){
