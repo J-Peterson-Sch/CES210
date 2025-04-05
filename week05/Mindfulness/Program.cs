@@ -52,7 +52,10 @@ class Program
             }
             //Display journal
             else if(userInput == "2"){
-                
+                ReflectingActivity reflecting = new ReflectingActivity();
+                reflecting.DisplayStartingMessage();
+                reflecting.Run();
+                reflecting.DisplayEndingMessage();
             }
             //Load
             else if(userInput == "3"){
