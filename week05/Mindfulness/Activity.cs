@@ -125,17 +125,37 @@ public class Activity {
 
     public void ShowCountDown(int seconds)
     {
-        for (int i = seconds; i > 0; i--)
-        {
-            Console.Write($"\r{i}");
-            Thread.Sleep(1000);
+        // Get initial cursor position
+        int leftPosition = Console.CursorLeft;
 
-            // Clear any extra characters from previous outputs. \r moves the curser to the start of the line.
-            // {0, " + seconds.ToString().Length + "} has it replace what's in the curley brakets with the zero index,
-            // " + seconds.ToString().Length + " tells it how much space to take up. You have to concat the length
-            // or it will read it as a literal string for some reason.
-            Console.Write("\r{0, " + seconds.ToString().Length + "}", " ");
+        for (int i = seconds; i >= 0; i--)
+        {
+            Console.SetCursorPosition(leftPosition, Console.CursorTop);
+            Console.Write(" {0}  ", i); 
+            Thread.Sleep(1000); 
         }
-        Console.WriteLine();
+
+        Console.WriteLine(); 
     }
+    
+    // public void ShowCountDown(int seconds)
+    // {
+    //     // Console.WriteLine("");
+    //     for (int i = seconds; i > 0; i--)
+    //     {
+    //         for (int j = seconds.ToString().Length ; j < 1; i++)
+    //         {
+    //             Console.Write("\b \b");
+    //         }
+    //         Console.Write($"\r{i}");
+    //         Thread.Sleep(1000);
+
+    //         // Clear any extra characters from previous outputs. \r moves the curser to the start of the line.
+    //         // {0, " + seconds.ToString().Length + "} has it replace what's in the curley brakets with the zero index,
+    //         // " + seconds.ToString().Length + " tells it how much space to take up. You have to concat the length
+    //         // or it will read it as a literal string for some reason.
+    //         Console.Write("{0, " + seconds.ToString().Length + "}", " ");
+    //     }
+    //     Console.WriteLine();
+    // }
 }
