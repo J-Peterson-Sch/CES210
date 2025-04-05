@@ -1,6 +1,7 @@
 public class BreathingActivity : Activity {
 
-    private int _breathCount = 10; //breath count in seconds
+    private int _breathInCount = 5; 
+    private int _breathOutCount = 10; 
     public static string _name = "Breathing Activity";
     private static string _description = "This activity will help you relax by walking you through "
                                     + "breathing in and out slowly. Clear your mind and focus "
@@ -21,9 +22,9 @@ public class BreathingActivity : Activity {
         while (DateTime.Now < endTime)
         {
             Console.Write("...Breath in...");
-            ShowCountDown(_breathCount);
+            ShowCountDown(_breathInCount);
             Console.Write("...Breath out...");
-            ShowCountDown(_breathCount);
+            ShowCountDown(_breathOutCount);
 
             Console.WriteLine("");
         }
