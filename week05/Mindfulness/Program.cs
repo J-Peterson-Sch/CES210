@@ -1,3 +1,6 @@
+// Jordan Peterson
+// For my createive bit, I count the actual time that a user spends on an activity and display that to
+// the user at the end.
 using System;
 using System.Diagnostics;
 

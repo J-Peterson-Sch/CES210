@@ -34,6 +34,8 @@ public class ListingActivity : Activity{
             Console.ReadLine();
             _count ++;
         }
+        DateTime trueEndTime = DateTime.Now;
+        base.SetTrueDuration(startTime,trueEndTime);
 
         Console.WriteLine($"You listed {_count} items!");
 

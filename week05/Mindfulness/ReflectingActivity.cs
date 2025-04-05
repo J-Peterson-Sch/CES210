@@ -1,6 +1,6 @@
 public class ReflectingActivity : Activity{
     private static string _name = "Reflecting Activity";
-    private static string _description = "This activity will help you reflect on times in your"
+    private static string _description = "This activity will help you reflect on times in your "
             + "life when you have shown strenght and resilience. This will help you recognize "
             + "the power you have and how you can use it in outher aspects of your life.";
 
@@ -47,6 +47,8 @@ public class ReflectingActivity : Activity{
         {
             DisplayQuestion();
         }
+        DateTime trueEndTime = DateTime.Now;
+        base.SetTrueDuration(startTime,trueEndTime);
     }
 
     public string GetRandomPrompt()

@@ -28,6 +28,7 @@ public class BreathingActivity : Activity {
 
             Console.WriteLine("");
         }
-
+        DateTime trueEndTime = DateTime.Now;
+        base.SetTrueDuration(startTime,trueEndTime);
     }
 }

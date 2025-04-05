@@ -3,6 +3,7 @@ public class Activity {
     private string _name;
     private string _description;
     private int _duration = 0;
+    private int _trueDuration = 0;
 
     public Activity(string name, string description)
     {
@@ -14,6 +15,13 @@ public class Activity {
     public int GetDuration()
     {
         return _duration;
+    }
+
+    public void SetTrueDuration(DateTime startTime, DateTime trueEndTime)
+    {
+        TimeSpan timeDifference = trueEndTime - startTime;
+        int totalSeconds = (int)timeDifference.TotalSeconds;
+        _trueDuration = totalSeconds;
     }
 
     public void DisplayStartingMessage()
@@ -29,7 +37,7 @@ public class Activity {
 
         while (!isValid)
         {
-            Console.WriteLine("How long, in seconds, would you like your session to last?: ");
+            Console.WriteLine("About how long, in seconds, would you like your session to last?: ");
             string input = Console.ReadLine();
 
             if (int.TryParse(input, out userInput))
@@ -57,7 +65,7 @@ public class Activity {
         ShowSpinner(5);
 
         Console.Clear();
-        Console.WriteLine($"You spent {_duration} seconds preforming the {_name} activity.");
+        Console.WriteLine($"You spent {_trueDuration} seconds preforming the {_name} activity.");
         ShowSpinner(5);
     }
 
