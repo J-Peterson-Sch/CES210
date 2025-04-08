@@ -59,15 +59,15 @@ public class GoalManager
 
                 if (userInput == "1")
                 {
-                    CreateGoal("SimpleGoal");
+                    CreateGoalWithPrompt("SimpleGoal");
                 }
                 else if(userInput == "2")
                 {
-                    CreateGoal("EternalGoal");
+                    CreateGoalWithPrompt("EternalGoal");
                 }
                 else if(userInput == "3")
                 {
-                    CreateGoal("ChecklistGoal");
+                    CreateGoalWithPrompt("ChecklistGoal");
                 }
 
             }
@@ -133,7 +133,15 @@ public class GoalManager
 
     public void ListGoalDetails(Goal goal)
     {
-        Console.WriteLine($"({goal.GetDescription()})");
+        Console.Write($"({goal.GetDescription()})");
+        if (goal.GetType().ToString() == "ChecklistGoal")
+        {
+            string[] goalData = goal.GetStringRepresentation().Split("|");
+            string target = goalData[4];
+            string amountCompleated = goalData[5];
+            Console.Write($" -- {amountCompleated}/{target}");
+        }
+        Console.WriteLine("");
     }
     public void CreateGoalWithPrompt(string goalType)
     {
@@ -152,28 +160,61 @@ public class GoalManager
         Console.WriteLine("");
         Console.Write("How many point for compleating this goal?: ");
         points = Console.ReadLine();
+        List<string> goalData = new List<string>();
+        goalData = [goalName, shortDescription, points];
 
         if (goalType == "SimpleGoal")
         {
-            SimpleGoal simpleGoal = new SimpleGoal(goalName, shortDescription, points);
-            
-            goals.Add(simpleGoal);
+            CreateGoal("SimpleGoal", goalData);
         }
         else if (goalType == "EternalGoal")
         {
-            EternalGoal eternalGoal = new EternalGoal(goalName, shortDescription, points);
-            
-            goals.Add(eternalGoal);
+            CreateGoal("EternalGoal", goalData);
         }
         else if (goalType == "ChecklistGoal")
         {
             Console.WriteLine("");
             Console.Write("How may times does the goal need to be accomplished for a bonus?: ");
             target = Console.ReadLine();
+            goalData.Add(target);
+
             Console.WriteLine("");
             Console.Write("How many bonus points will you achive?: ");
             bonus = Console.ReadLine();
-            //add instantiation when class created
+            string amountComplete = "0";
+            goalData.Add(amountComplete);
+            goalData.Add(bonus);
+            CreateGoal("ChecklistGoal", goalData);
+        }
+        else
+        {
+            Console.WriteLine("There was an error creating the goal. Unkown goal type.");
+        }
+    }
+
+    public void CreateGoal(string goalType, List<string> goalData)
+    {
+        string name = goalData[0];
+        string description = goalData[1];
+        string points = goalData[2];    
+
+        if (goalType == "SimpleGoal")
+        {
+            SimpleGoal goal = new SimpleGoal(name, description, points);
+            goals.Add(goal);
+        }
+        else if (goalType == "EternalGoal")
+        {
+            EternalGoal goal = new EternalGoal(name, description, points);
+            goals.Add(goal);
+        }
+        else if (goalType == "ChecklistGoal")
+        {
+            int target = int.Parse(goalData[3]);
+            int amountComplete = int.Parse(goalData[4]);
+            int bonus = int.Parse(goalData[5]);
+            ChecklistGoal goal = new ChecklistGoal(name, description, points, target, amountComplete, bonus);
+            goals.Add(goal);
         }
         else
         {
@@ -196,9 +237,19 @@ public class GoalManager
         Console.WriteLine("");
         Console.Write("Which goal did you accomplish?: ");
         string userInput = Console.ReadLine();
+        Goal accomplishedGoal = goals[int.Parse(userInput)-1];
+        accomplishedGoal.RecordEvent();
+        _score += int.Parse(accomplishedGoal.GetPoints());
 
-        goals[int.Parse(userInput)-1].RecordEvent();
-        _score += int.Parse(goals[int.Parse(userInput)-1].GetPoints());
+        if (accomplishedGoal.GetType().ToString() == "ChecklistGoal")
+        {
+            if (accomplishedGoal.IsComplete())
+            {
+                string[] goalData = accomplishedGoal.GetStringRepresentation().Split("|");
+                string bonus = goalData[6];
+                _score += int.Parse(bonus);
+            }
+        }
     }
     public void SaveGoals()
     {
@@ -223,6 +274,7 @@ public class GoalManager
         string fileName = Console.ReadLine();
         string[] lines = System.IO.File.ReadAllLines(fileName);
         int counter = 0;
+        goals = [];
 
         foreach (string line in lines)
         {
@@ -247,12 +299,15 @@ public class GoalManager
                 }
                 else if (type == "EternalGoal")
                 {
-                    Eter simpleGoal = new SimpleGoal(name, description, points);
+                    EternalGoal simpleGoal = new EternalGoal(name, description, points);
                     goals.Add(simpleGoal);
                 }
                 else if (type == "ChecklistGoal")
                 {
-                    SimpleGoal simpleGoal = new SimpleGoal(name, description, points);
+                    int target = int.Parse(parts[4]);
+                    int amountComplete = int.Parse(parts[5]);
+                    int bonus = int.Parse(parts[6]);
+                    ChecklistGoal simpleGoal = new ChecklistGoal(name, description, points, target, amountComplete, bonus);
                     goals.Add(simpleGoal);
                 }
             }
