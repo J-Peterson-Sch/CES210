@@ -123,7 +123,18 @@ public class GoalManager
 
     public void DisplayPlayerInfo()
     {
-        Console.WriteLine($"You currently have {_score} points.");
+        int playerLevel;
+        if (_score > 999)
+        {
+            playerLevel = int.Parse(_score.ToString().Substring(0, _score.ToString().Length - 3));
+        }
+        else
+        {
+            playerLevel = 0;
+        }
+        
+        Console.WriteLine($"You are currently at level {playerLevel} with {_score} points.");
+        
     }
 
     public void ListGoalNames(Goal goal)
