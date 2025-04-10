@@ -1,6 +1,5 @@
 public class Running : Activity
  {
-
     private double _distance;
 
     public Running(double duration, double distance) :base (duration)

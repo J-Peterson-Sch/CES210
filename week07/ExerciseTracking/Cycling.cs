@@ -1,6 +1,5 @@
 public class Cycling : Activity
  {
-
     private double _speed;
 
     public Cycling(double duration, double speed) :base (duration)
