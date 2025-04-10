@@ -19,7 +19,10 @@ public  abstract class Activity {
         return _duration;
     }
 
-    public abstract void GetSummary();
+    public void GetSummary()
+    {  Console.WriteLine($"{GetDate()} {GetType()} ({GetActivityDuration()} min)- Distance {GetDistance()} "
+        + $"miles, Speed {GetSpeed():F2} mph, Pace: {GetPace():F2} min per mile");
+    }
     public abstract double GetDistance();
 
     public abstract double GetSpeed();

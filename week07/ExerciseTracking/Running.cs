@@ -8,12 +8,6 @@ public class Running : Activity
         _distance = distance;
     }
 
-    public override void GetSummary()
-    {
-        Console.WriteLine($"{GetDate()} {this.GetType()} ({GetActivityDuration()} min)- Distance {_distance} "
-        + $"miles, Speed {GetSpeed():F2} mph, Pace: {GetPace():F2} min per mile");
-    }
-
     public override double GetDistance()
     {
         return _distance;

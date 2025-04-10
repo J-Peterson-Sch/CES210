@@ -8,12 +8,6 @@ public class Cycling : Activity
         _speed = speed;
     }
 
-    public override void GetSummary()
-    {
-        Console.WriteLine($"{GetDate()} {this.GetType()} ({GetActivityDuration()} min)- Distance {GetDistance()} "
-        + $"miles, Speed {GetSpeed():F2} mph, Pace: {GetPace():F2} min per mile");
-    }
-
     public override double GetDistance()
     {
         return _speed * GetActivityDuration() / 60;
